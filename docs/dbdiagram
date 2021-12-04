@@ -1,0 +1,13 @@
+Table quotes {
+  id int [pk, increment] // auto-increment
+  author varchar [null]
+  quote varchar [not null]
+}
+
+Table date_quotes {
+  date date
+  quote_id int [ref: > quotes.id]
+  like_count uint
+  deleted_at timestamp
+  updated_at timestamp
+}

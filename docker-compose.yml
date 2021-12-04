@@ -1,0 +1,45 @@
+version: '3.8'
+x-wager-common:
+  &wager-common
+  image: ${WAGER_APP_IMAGE_NAME:-quote-today:local}
+  # build: .
+  environment:
+    &wager-common-env
+    LOG_MODE: production
+    LOG_LEVEL: INFO
+    GIN_MODE: release
+    DB_NAME: code-challenge
+    DB_USER: dev
+    DB_PASSWORD: dev
+    DB_ADDRESS: mydb:3306
+    DB_HOST: mydb
+    DB_PORT: 5432
+
+services:
+  mydb:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: dev
+      POSTGRES_USER: dev
+      POSTGRES_DB: code-challenge
+    ports:
+    - "5432:5432"
+
+  wager-app:
+    <<: *wager-common
+    restart: always
+    depends_on:
+    - mydb
+    ports:
+    - "8080:8080"
+
+  wager-migration:
+    <<: *wager-common
+    restart: on-failure
+    entrypoint: ./migrate
+    depends_on:
+      - wager-app
+
+volumes:
+  dbstorage:

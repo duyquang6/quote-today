@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  mydb:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: code-challenge-integration
+    ports:
+      - "5433:5432"
