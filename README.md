@@ -1,3 +1,6 @@
+## Intro
+A web app that displays a new random famous quote every day (UTC timezone) and allows people to like/unlike the quote. The app display the current like/unlike count.
+
 ## Dependencies
 - Docker
 - Go 1.17
