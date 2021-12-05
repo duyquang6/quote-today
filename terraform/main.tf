@@ -22,8 +22,8 @@ resource "heroku_build" "quote-today-app" {
   buildpacks = ["https://github.com/heroku/heroku-buildpack-go.git"]
 
   source {
-    path     = "/Users/linguyen/go/src/new-repo/part3"
-    version = "0.0.1"
+    url     = "https://github.com/duyquang6/quote-today/archive/refs/tags/v0.0.2.tar.gz"
+    version = "0.0.2"
   }
 }
 

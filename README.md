@@ -36,5 +36,5 @@ Or you can use skaffold to automate that pipeline
 Easily deploy with terraform enabled
 - `heroku login` to get heroku context
 - Go to terraform folder, run `terraform init` to initialize
-- Run `terraform deploy` to create infras & build and deploy
+- Run `terraform apply` to create infras & build and deploy
 - Go to heroku management page, setup the config for the app and redeploy
