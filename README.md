@@ -39,3 +39,8 @@ Or you can use skaffold to automate that pipeline
 - Check coverage: `make coverage`
 - Clean up report files: `make clean`
 
+## Telegram Bot Token
+- Inject ENV config for Telegram Bot: TELEGRAM_BOT_TOKEN, TELEGRAM_BOT_CHAT_ID
+![image](https://user-images.githubusercontent.com/20740760/144732635-3f442db1-cb6f-4f77-b8ce-4d0d8237d0d2.png)
+
+
