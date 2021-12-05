@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	purchaseServiceLoggingFmt = "PurchaseService.%s"
+	dateQuoteServiceLoggingFmt = "DateQuoteService.%s"
 )
 
 // DateQuoteService provide purchase service functionality
@@ -46,7 +46,7 @@ func (s *dateQuoteSvc) GetRandomQuoteInsertIfNotExist(ctx context.Context) (dto.
 	var (
 		tx       = s.dbFactory.GetDB()
 		function = "GetRandomQuoteInsertIfNotExist"
-		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(purchaseServiceLoggingFmt, function))
+		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(dateQuoteServiceLoggingFmt, function))
 	)
 
 	dateQuote, err := s.dateQuoteRepo.Get(ctx, tx, datatypes.Date(time.Now().UTC()))
@@ -97,7 +97,7 @@ func (s *dateQuoteSvc) Like(ctx context.Context, request dto.LikeRequest) (dto.L
 	var (
 		tx       = s.dbFactory.GetDB()
 		function = "Like"
-		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(purchaseServiceLoggingFmt, function))
+		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(dateQuoteServiceLoggingFmt, function))
 	)
 	dateTime := time.Unix(int64(request.Date), 0)
 	err := s.dateQuoteRepo.IncreaseLikeByOne(ctx, tx, datatypes.Date(dateTime))
@@ -119,7 +119,7 @@ func (s *dateQuoteSvc) Dislike(ctx context.Context, request dto.LikeRequest) (dt
 	var (
 		tx       = s.dbFactory.GetDB()
 		function = "Dislike"
-		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(purchaseServiceLoggingFmt, function))
+		logger   = logging.FromContext(ctx).Named(fmt.Sprintf(dateQuoteServiceLoggingFmt, function))
 	)
 	dateTime := time.Unix(int64(request.Date), 0)
 	err := s.dateQuoteRepo.DecreaseLikeByOne(ctx, tx, datatypes.Date(dateTime))

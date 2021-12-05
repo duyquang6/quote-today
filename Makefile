@@ -3,7 +3,7 @@ GOTEST=$(GOCMD) test
 GOVET=$(GOCMD) vet
 EXPORT_RESULT ?= false
 GO_TOOLS = github.com/vektra/mockery/v2/.../
-ENV_BUILD_LOCAL_DOCKER=WAGER_APP_IMAGE_NAME=quote-today:local
+ENV_BUILD_LOCAL_DOCKER=APP_IMAGE_NAME=quote-today:local
 ENV_INTEGRATION_TEST=\
   DB_ADDRESS=0.0.0.0:5433 \
   DB_PASSWORD=test \
@@ -39,10 +39,10 @@ docker.integration.stop:
 	docker-compose -f docker-compose-it.yml down -v;
 
 docker.local.start:
-	$(WAGER_APP_IMAGE_NAME) docker-compose -f docker-compose.yml up -d --remove-orphans;
+	$(APP_IMAGE_NAME) docker-compose -f docker-compose.yml up -d --remove-orphans;
 
 docker.local.stop:
-	$(WAGER_APP_IMAGE_NAME) docker-compose -f docker-compose.yml down -v;
+	$(APP_IMAGE_NAME) docker-compose -f docker-compose.yml down -v;
 
 build:
 	@./scripts/app-build.sh

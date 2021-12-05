@@ -1,4 +1,4 @@
-package wager
+package datequote
 
 import (
 	"encoding/json"

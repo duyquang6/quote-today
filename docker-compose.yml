@@ -1,10 +1,10 @@
 version: '3.8'
-x-wager-common:
-  &wager-common
-  image: ${WAGER_APP_IMAGE_NAME:-quote-today:local}
+x-quote-today-common:
+  &quote-today-common
+  image: ${APP_IMAGE_NAME:-quote-today:local}
   # build: .
   environment:
-    &wager-common-env
+    &quote-today-common-env
     LOG_MODE: production
     LOG_LEVEL: INFO
     GIN_MODE: release
@@ -26,20 +26,20 @@ services:
     ports:
     - "5432:5432"
 
-  wager-app:
-    <<: *wager-common
+  app:
+    <<: *quote-today-common
     restart: always
     depends_on:
     - mydb
     ports:
     - "8080:8080"
 
-  wager-migration:
-    <<: *wager-common
+  migration:
+    <<: *quote-today-common
     restart: on-failure
     entrypoint: ./migrate
     depends_on:
-      - wager-app
+      - app
 
 volumes:
   dbstorage:

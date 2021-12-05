@@ -9,6 +9,7 @@ require (
 	github.com/go-gormigrate/gormigrate/v2 v2.0.0
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.4.0
 	github.com/google/go-cmp v0.5.4
 	github.com/oklog/ulid/v2 v2.0.2
 	github.com/sethvargo/go-envconfig v0.3.2

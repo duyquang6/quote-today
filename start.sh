@@ -30,7 +30,7 @@ bootstrap() {
   echo "Wait 30 secs for db start complete & run migration"
   sleep 30
   echo "----------- DONE -------------"
-  echo "Try hit endpoint http://0.0.0.0:8080/wagers !"
+  echo "Try hit endpoint http://0.0.0.0:8080/ping !"
   echo "Run make docker.local.stop to stop docker instances"
 }
 

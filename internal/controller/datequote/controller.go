@@ -1,4 +1,4 @@
-package wager
+package datequote
 
 import (
 	"github.com/duyquang6/quote-today/internal/service"
@@ -9,8 +9,8 @@ type Controller struct {
 }
 
 // NewController creates a new controller.
-func NewController(wagerService service.DateQuoteService) *Controller {
+func NewController(dateQuoteService service.DateQuoteService) *Controller {
 	return &Controller{
-		service: wagerService,
+		service: dateQuoteService,
 	}
 }
