@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"net/http"
+	"os"
 
 	dateQuoteControllerPkg "github.com/duyquang6/quote-today/internal/controller/datequote"
 	"github.com/duyquang6/quote-today/internal/database"
@@ -28,10 +29,14 @@ func initRoute(ctx context.Context, r *gin.Engine,
 	dateQuoteController *dateQuoteControllerPkg.Controller) {
 	r.Use(middleware.PopulateRequestID())
 	r.Use(middleware.PopulateLogger(logging.FromContext(ctx)))
-	//r.LoadHTMLGlob("web/**/*.html")
+
+	appUrl := os.Getenv("APP_URL")
+	if len(appUrl) == 0 {
+		appUrl = "http://localhost:8080"
+	}
 	r.LoadHTMLFiles("web/index.tmpl")
 	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{"apiEndpoint": "http://localhost:8080"})
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{"apiEndpoint": appUrl})
 	})
 	api := r.Group("/api")
 	{

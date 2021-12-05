@@ -1,3 +1,5 @@
+// +heroku goVersion go1.17
+// +heroku install ./cmd/app
 module github.com/duyquang6/quote-today
 
 go 1.17

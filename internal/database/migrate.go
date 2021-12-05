@@ -2,7 +2,10 @@ package database
 
 import (
 	"context"
+	"encoding/csv"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
@@ -35,13 +38,31 @@ var gormMigrationScripts = []*gormigrate.Migration{
 	{
 		ID: "00003-InsertQuotes",
 		Migrate: func(tx *gorm.DB) error {
-			quotes := []model.Quote{
-				{Author: "Thomas Edison", Quote: "Genius is one percent inspiration and ninety-nine percent perspiration."},
-				{Author: "Yogi Berra", Quote: "You can observe a lot just by watching."},
-				{Author: "Abraham Lincoln", Quote: "A house divided against itself cannot stand."},
-				{Author: "Johann Wolfgang von Goethe", Quote: "Difficulties increase the nearer we get to the goal."},
-				{Author: "Byron Pulsifer", Quote: "Fate is in your hands and no one elses"},
-				{Author: "Thomas Edison", Quote: "Genius is one percent inspiration and ninety-nine percent perspiration."},
+			resp, err := http.Get("https://gist.githubusercontent.com/duyquang6/a0def025bdc27969b8cf0890a6b1bf86/raw/963b5a9355f04741239407320ac973a6096cd7b6/quotes.csv")
+			if err != nil {
+				return err
+			}
+			r := csv.NewReader(resp.Body)
+			var quotes []model.Quote
+			var author, quote string
+			lineCount := 0
+			for {
+				record, err := r.Read()
+
+				if err == io.EOF {
+					break
+				}
+
+				if err != nil {
+					log.Fatal(err)
+				}
+				lineCount++
+				if lineCount == 1 {
+					// skip line 1 because of header
+					continue
+				}
+				author, quote = record[0], record[1]
+				quotes = append(quotes, model.Quote{Author: author, Quote: quote})
 			}
 			return tx.Create(&quotes).Error
 		},

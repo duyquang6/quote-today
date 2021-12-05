@@ -5,10 +5,11 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"gorm.io/driver/postgres"
 	"io/ioutil"
 	"strings"
 	"time"
+
+	"gorm.io/driver/postgres"
 
 	"github.com/go-sql-driver/mysql"
 	"gorm.io/gorm"
@@ -41,7 +42,7 @@ func dbToMysqlDSN(cfg *Config) string {
 	mySqlConfig.DBName = cfg.Name
 	mySqlConfig.ParseTime = true
 
-	if cfg.EnableSSL {
+	if cfg.SSLMode != "disable" {
 		tlsConfigName := "custom"
 		rootCertPool := x509.NewCertPool()
 		pem, err := ioutil.ReadFile(cfg.SSLRootCertPath)
@@ -106,10 +107,7 @@ func dbValues(cfg *Config) map[string]string {
 	setIfNotEmpty(p, "user", cfg.User)
 	setIfNotEmpty(p, "host", hostAndPort[0])
 	setIfNotEmpty(p, "port", hostAndPort[1])
-	if cfg.EnableSSL {
-		setIfNotEmpty(p, "sslmode", "verify-ca")
-	}
-	setIfNotEmpty(p, "sslmode", "disable")
+	setIfNotEmpty(p, "sslmode", cfg.SSLMode)
 	setIfPositive(p, "connect_timeout", cfg.ConnectionTimeout)
 	setIfNotEmpty(p, "password", cfg.Password)
 	setIfNotEmpty(p, "sslcert", cfg.SSLCertPath)

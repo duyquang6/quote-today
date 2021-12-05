@@ -1,5 +1,6 @@
 ## Intro
 A web app that displays a new random famous quote every day (UTC timezone) and allows people to like/unlike the quote. The app display the current like/unlike count.
+App example: https://duyquang6-quote-today.herokuapp.com
 
 ## Dependencies
 - Docker
@@ -29,3 +30,11 @@ Or you can use skaffold to automate that pipeline
 - Run unittest: `make test.unit`
 - Check coverage: `make coverage`
 - Clean up report files: `make clean`
+
+## Heroku deploy 
+
+Easily deploy with terraform enabled
+- `heroku login` to get heroku context
+- Go to terraform folder, run `terraform init` to initialize
+- Run `terraform deploy` to create infras & build and deploy
+- Go to heroku management page, setup the config for the app and redeploy

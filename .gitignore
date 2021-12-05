@@ -5,3 +5,6 @@ rbac
 bin/*
 .vscode
 .idea
+terraform.tfstate
+.env
+.terraform

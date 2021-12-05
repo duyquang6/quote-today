@@ -7,7 +7,7 @@ type Config struct {
 	Protocol               string `env:"DB_PROTOCOL, default=tcp" json:",omitempty"`
 	Address                string `env:"DB_ADDRESS, default=localhost:3306" json:",omitempty"`
 	Password               string `env:"DB_PASSWORD" json:"-"` // ignored by zap's JSON formatter
-	EnableSSL              bool   `env:"DB_ENABLE_SSL, default=false" json:",omitempty"`
+	SSLMode                string `env:"DB_SSL_MODE, default=disable" json:",omitempty"`
 	SSLCertPath            string `env:"DB_SSLCERT" json:",omitempty"`
 	SSLKeyPath             string `env:"DB_SSLKEY" json:",omitempty"`
 	SSLRootCertPath        string `env:"DB_SSLROOTCERT" json:",omitempty"`

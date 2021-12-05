@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/duyquang6/quote-today/internal/database"
@@ -29,8 +30,12 @@ func (s *httpServer) Run(ctx context.Context) error {
 	r := gin.Default()
 
 	s.setupDependencyAndRouter(ctx, r, s.db)
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = "8080"
+	}
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    ":" + port,
 		Handler: r,
 	}
 	return s.ServeHTTP(ctx, srv)
