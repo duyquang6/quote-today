@@ -51,6 +51,14 @@ resource "heroku_addon" "webhook" {
   }
 }
 
+# Add a web-hook for the app
+resource "heroku_app_webhook" "quote-today-app-release" {
+  app_id  = heroku_app.quote-today-app.id
+  level   = "notify"
+  url     = "https://webhook.site/3d82d978-e781-4273-b7af-2cd717bacc44"
+  include = ["api:release"]
+}
+
 output "quote_today_url" {
   value = "https://${heroku_app.quote-today-app.name}.herokuapp.com"
 }
