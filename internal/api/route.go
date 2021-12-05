@@ -38,6 +38,7 @@ func initRoute(ctx context.Context, r *gin.Engine,
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{"apiEndpoint": appUrl})
 	})
+	r.Static("/css", "web/css")
 	api := r.Group("/api")
 	{
 		sub := api.Group("/date-quote")
