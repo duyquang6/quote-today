@@ -47,7 +47,7 @@ resource "heroku_addon" "webhook" {
   plan = "deployhooks:http"
 
   config = {
-    url = "https://${heroku_app.quote-today-app.name}.herokuapp.com/webhook/telebot"
+    url = "https://webhook.site/73082c47-bfe3-4b81-ac49-091212f061b1"
   }
 }
 
@@ -55,7 +55,7 @@ resource "heroku_addon" "webhook" {
 resource "heroku_app_webhook" "quote-today-app-release" {
   app_id  = heroku_app.quote-today-app.id
   level   = "notify"
-  url     = "https://${heroku_app.quote-today-app.name}.herokuapp.com/webhook/telebot"
+  url     = "https://webhook.site/73082c47-bfe3-4b81-ac49-091212f061b1"
   include = ["api:release"]
 }
 
