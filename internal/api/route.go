@@ -21,7 +21,7 @@ func (s *httpServer) setupDependencyAndRouter(ctx context.Context, r *gin.Engine
 	quoteRepo := repository.NewQuoteRepository()
 	dateQuoteRepo := repository.NewDateQuoteRepository()
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("TELEGRAM_BOT_TOKEN"))
-	logger.Info("Authorized on account %s", s.botApi.Self.UserName)
+	logger.Info("Authorized on account %s", bot.Self.UserName)
 	if err != nil {
 		logger.Error("cannot connect telegram bot, error:", err)
 	}
