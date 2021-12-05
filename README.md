@@ -12,6 +12,14 @@ App example: https://duyquang6-quote-today.herokuapp.com
 - Run `./start.sh --bootstrap` quick bootstrap app (include build, start docker, migrate schema and start app), it will ready to accept connection to :8080 local
 - Run `make docker.local.stop` to cleanup
 
+## Heroku deploy 
+
+Easily deploy with terraform enabled
+- `heroku login` to get heroku context
+- Go to terraform folder, run `terraform init` to initialize
+- Run `terraform apply` to create infras & build and deploy
+- Go to heroku management page, setup the config for the app and redeploy
+
 ## For developing
 - Get tools for developing: `make install-go-tools`
 - Build app docker image: run `make build.docker.image`
@@ -31,10 +39,3 @@ Or you can use skaffold to automate that pipeline
 - Check coverage: `make coverage`
 - Clean up report files: `make clean`
 
-## Heroku deploy 
-
-Easily deploy with terraform enabled
-- `heroku login` to get heroku context
-- Go to terraform folder, run `terraform init` to initialize
-- Run `terraform apply` to create infras & build and deploy
-- Go to heroku management page, setup the config for the app and redeploy
