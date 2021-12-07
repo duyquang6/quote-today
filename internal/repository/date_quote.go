@@ -44,7 +44,7 @@ WHERE date = ?`, date).Error
 
 // Get increase like count
 func (s *dateQuoteRepo) Get(ctx context.Context, tx *gorm.DB, date datatypes.Date) (model.DateQuote, error) {
-	res := model.DateQuote{Date: date}
-	err := tx.Preload("Quote").First(&res).Error
+	res := model.DateQuote{}
+	err := tx.Preload("Quote").First(&res, "date = ?", date).Error
 	return res, err
 }
