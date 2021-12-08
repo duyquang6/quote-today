@@ -16,6 +16,8 @@
 			currentDateTimestamp = jsonRes.date
 		};
 		const likeOrDislike = async () => {
+			document.getElementById('like_action').style.display = 'none';
+			document.getElementById('loading').style.display = 'block';
 			if (isLike) {
 			    // Do dislike
 				const response = await fetch(`${apiEndpoint}/api/date-quote/dislike`, {
@@ -31,6 +33,8 @@
 					const jsonRes = await response.json();
 					document.getElementById("like_action").innerHTML = "Like"
 					document.getElementById("like_count").innerHTML = jsonRes.like_count + " likes"
+					document.getElementById('like_action').style.display = 'block';
+					document.getElementById('loading').style.display = 'none';
 					isLike = false
 				}
 			} else {
@@ -48,6 +52,8 @@
 					const jsonRes = await response.json();
 					document.getElementById("like_action").innerHTML = "Dislike"
 					document.getElementById("like_count").innerHTML = jsonRes.like_count + " likes"
+					document.getElementById('like_action').style.display = 'block';
+					document.getElementById('loading').style.display = 'none';
 					isLike = true
 				}
 			}
@@ -60,5 +66,6 @@
 	<p id="quote"></p>
 	<p id="like_count"></p>
 	<button id="like_action" type="button" onclick="likeOrDislike()">Like</button>
+	<p id="loading" style="display:none;">Processing...</p>
 </body>
 </html>
